@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Fret } from "./Fret";
 
-
 const NUM_FRETS = 21;
 const BASE_FRET_WIDTH = 60;
 
@@ -37,7 +36,6 @@ const noteOrderSharps = [
   "G♯",
 ];
 
-
 export function String(props) {
   const { useFlats } = useSelector((state) => state.controls);
   let noteOrder = useFlats ? noteOrderFlats : noteOrderSharps;
@@ -45,9 +43,17 @@ export function String(props) {
   let frets = [];
 
   for (let i = 0; i <= NUM_FRETS; i++) {
-    frets.push(
-      <Fret width={`${BASE_FRET_WIDTH - i}px`}>{noteOrder[index]}</Fret>
-    );
+    if (i == 0) {
+      frets.push(
+        <Fret overrideColour="#262626" width={`${BASE_FRET_WIDTH - i}px`}>
+          {noteOrder[index]}
+        </Fret>
+      );
+    } else {
+      frets.push(
+        <Fret width={`${BASE_FRET_WIDTH - i}px`}>{noteOrder[index]}</Fret>
+      );
+    }
 
     if (index === noteOrder.length - 1) {
       index = 0;

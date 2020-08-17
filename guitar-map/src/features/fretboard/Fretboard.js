@@ -2,15 +2,14 @@ import React from "react";
 import { String } from "./String";
 import { Legend } from "./Legend";
 
-export function Fretboard() {
+export function Fretboard(props) {
+  const tuning = props.tuning || "E,A,D,G,B,E";
+
+  const strings = tuning.split(",").map(note => <String startingNote={note} />);
   return (
     <div>
-      <String startingNote="E" />
-      <String startingNote="B" />
-      <String startingNote="G" />
-      <String startingNote="D" />
-      <String startingNote="A" />
-      <String startingNote="E" />
+      <Legend />
+      {strings}
       <Legend />
     </div>
   );

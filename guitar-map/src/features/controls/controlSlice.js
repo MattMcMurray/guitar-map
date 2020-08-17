@@ -120,10 +120,11 @@ const COLOUR_POOL = [RED, ELECTRIC_BLUE, LIME, VOLCANO, PURPLE, DARK_GREEN, LIGH
 export const controlSlice = createSlice({
   name: "controls",
   initialState: {
-    useFlats: true,
+    useFlats: false,
     currColourIndex: 0,
+    tuning: "E,A,D,G,B,E",
     notes: {
-      ...flats,
+      ...sharps,
     },
   },
 
@@ -163,9 +164,16 @@ export const controlSlice = createSlice({
         },
       };
     },
+
+    updateTuning: (state, action) => {
+      return {
+        ...state,
+        tuning: action.payload
+      }
+    }
   },
 });
 
-export const { toggleNote, toggleUseFlats } = controlSlice.actions;
+export const { toggleNote, toggleUseFlats, updateTuning } = controlSlice.actions;
 
 export default controlSlice.reducer;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Fretboard } from './features/fretboard/Fretboard';
 import { ControlPanel } from './features/controls/ControlPanel';
+import { useSelector } from "react-redux";
 import './App.css';
 
 import { Typography } from 'antd';
@@ -10,6 +11,7 @@ const { Title } = Typography;
 const { Header, Footer, Sider, Content } = Layout;
 
 function App() {
+  const { tuning } = useSelector((state) => state.controls);
   return (
     <div className="App">
       <Layout>
@@ -21,7 +23,7 @@ function App() {
             <ControlPanel />
           </Sider>
           <Content>
-            <Fretboard />
+            <Fretboard tuning={tuning || "E,A,D,G,B,E"}/>
           </Content>
         </Layout>
       </Layout>
