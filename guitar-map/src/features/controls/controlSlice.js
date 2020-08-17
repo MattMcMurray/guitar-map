@@ -156,6 +156,7 @@ export const controlSlice = createSlice({
 
       return {
         ...state,
+        currColourIndex: 0,
         useFlats,
         notes: {
           ...notesToUse,
