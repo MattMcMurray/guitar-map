@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Checkbox, Row, Col, Switch, Select, Divider} from "antd";
+import { Typography, Checkbox, Row, Col, Switch, Select, Divider } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 
 import { toggleNote, toggleUseFlats, updateTuning } from "./controlSlice";
@@ -44,8 +44,8 @@ export function ControlPanel() {
   return (
     <div>
       <Row>
-        <Col span={24} style={{textAlign: "left"}}>
-        <Paragraph style={{color: "white"}}>Tuning:</Paragraph>
+        <Col span={24} style={{ textAlign: "left" }}>
+          <Paragraph style={{ color: "white" }}>Tuning:</Paragraph>
         </Col>
         <Col span={24}>
           <Select
@@ -59,11 +59,11 @@ export function ControlPanel() {
           </Select>
         </Col>
       </Row>
-      <Divider style={{color:" white"}} />
+      <Divider style={{ color: " white" }} />
       <Row>
-        <Col span={16} style={{textAlign: "left"}}>
+        <Col span={16} style={{ textAlign: "left" }}>
           <Paragraph level={3} style={{ color: "white" }}>
-            Flats/Sharps
+            Show Flats
           </Paragraph>
         </Col>
         <Col span={8}>
