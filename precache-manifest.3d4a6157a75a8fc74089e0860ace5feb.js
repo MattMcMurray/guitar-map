@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8bb0434a2b31e75073c72412da110d74",
+    "revision": "b46996f5dba26d2aba1ae6645e03ba34",
     "url": "/guitar-map/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/guitar-map/static/css/2.04ff9426.chunk.css"
   },
   {
-    "revision": "790e2b3fa59253bd776c",
+    "revision": "b39733f809aa0c3d1411",
     "url": "/guitar-map/static/css/main.b74f4691.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/guitar-map/static/js/2.b0357e71.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "790e2b3fa59253bd776c",
-    "url": "/guitar-map/static/js/main.dea2ab89.chunk.js"
+    "revision": "b39733f809aa0c3d1411",
+    "url": "/guitar-map/static/js/main.f26bae1f.chunk.js"
   },
   {
     "revision": "473c16d1bb6570ed9166",
