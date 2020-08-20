@@ -43,15 +43,24 @@ export function String(props) {
   let frets = [];
 
   for (let i = 0; i <= NUM_FRETS; i++) {
-    if (i == 0) {
+    if (i === 0) {
       frets.push(
-        <Fret overrideColour="#262626" width={`${BASE_FRET_WIDTH - i}px`}>
+        <Fret
+          key={`${noteOrder[index]}-${i}`}
+          overrideColour="#262626"
+          width={`${BASE_FRET_WIDTH - i}px`}
+        >
           {noteOrder[index]}
         </Fret>
       );
     } else {
       frets.push(
-        <Fret width={`${BASE_FRET_WIDTH - i}px`}>{noteOrder[index]}</Fret>
+        <Fret
+          key={`${noteOrder[index]}-${i}`}
+          width={`${BASE_FRET_WIDTH - i}px`}
+        >
+          {noteOrder[index]}
+        </Fret>
       );
     }
 

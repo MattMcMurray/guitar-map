@@ -8,7 +8,7 @@ import { Typography } from 'antd';
 import { Layout } from 'antd';
 
 const { Title } = Typography;
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Sider, Content } = Layout;
 
 function App() {
   const { tuning } = useSelector((state) => state.controls);

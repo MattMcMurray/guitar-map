@@ -8,7 +8,7 @@ export function Fretboard(props) {
   const strings = tuning
     .split(",")
     .reverse() // since tunings are listed top-to-bottom, but we need to display bottom to top
-    .map((note) => <String startingNote={note} />);
+    .map((note, i) => <String startingNote={note} key={`${note}-${i}`} />);
   return (
     <div>
       <Legend />

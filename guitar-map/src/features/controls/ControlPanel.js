@@ -25,9 +25,13 @@ export function ControlPanel(props) {
     dispatch(toggleNote(note));
   };
 
-  const noteButtons = Object.keys(notes).map((note) => {
+  const noteControls = Object.keys(notes).map((note) => {
     return (
-      <Col span={props.expandControls ? 12 : 24} style={{ textAlign: "left" }}>
+      <Col
+        key={note}
+        span={props.expandControls ? 12 : 24}
+        style={{ textAlign: "left" }}
+      >
         <Checkbox
           style={{ color: "white" }}
           value={note}
@@ -59,7 +63,9 @@ export function ControlPanel(props) {
               onChange={(tuning) => dispatch(updateTuning(tunings[tuning]))}
             >
               {Object.keys(tunings).map((tuning) => (
-                <Option value={tuning}>{tuning}</Option>
+                <Option key={tuning} value={tuning}>
+                  {tuning}
+                </Option>
               ))}
             </Select>
           </Col>
@@ -88,7 +94,7 @@ export function ControlPanel(props) {
             <Paragraph style={{ color: "white" }}>Notes:</Paragraph>
           </Col>
         ) : null}
-        {noteButtons}
+        {noteControls}
       </Row>
     </div>
   );
