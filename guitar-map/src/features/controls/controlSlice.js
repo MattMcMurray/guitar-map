@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { SHARP, FLAT } from "../../constants";
 
 const flats = {
   "A♭": {
@@ -115,7 +116,20 @@ const ELECTRIC_BLUE = "#1d39c4";
 const PURPLE = "#722ed1";
 const MAGENTA = "#eb2f96";
 
-const COLOUR_POOL = [RED, ELECTRIC_BLUE, LIME, VOLCANO, PURPLE, DARK_GREEN, LIGHT_ORANGE, CYAN, GOLD, MAGENTA, YELLOW, LIGHT_BLUE];
+const COLOUR_POOL = [
+  RED,
+  ELECTRIC_BLUE,
+  LIME,
+  VOLCANO,
+  PURPLE,
+  DARK_GREEN,
+  LIGHT_ORANGE,
+  CYAN,
+  GOLD,
+  MAGENTA,
+  YELLOW,
+  LIGHT_BLUE,
+];
 
 export const controlSlice = createSlice({
   name: "controls",
@@ -134,7 +148,9 @@ export const controlSlice = createSlice({
 
       const newState = !state["notes"][note]["state"];
       const newColour = newState ? COLOUR_POOL[state.currColourIndex] : "";
-      const newColourIndex = newState ? state.currColourIndex + 1 : state.currColourIndex - 1;
+      const newColourIndex = newState
+        ? state.currColourIndex + 1
+        : state.currColourIndex - 1;
 
       return {
         ...state,
@@ -142,10 +158,20 @@ export const controlSlice = createSlice({
         notes: {
           ...state.notes,
           [note]: {
-              state: newState,
-              colour: newColour,
-          }
+            state: newState,
+            colour: newColour,
+          },
         },
+      };
+    },
+
+    clearNotes: (state) => {
+      const notes = state.useFlats ? flats : sharps;
+
+      return {
+        ...state,
+        currColourIndex: 0,
+        notes,
       };
     },
 
@@ -168,12 +194,38 @@ export const controlSlice = createSlice({
     updateTuning: (state, action) => {
       return {
         ...state,
-        tuning: action.payload
+        tuning: action.payload,
+      };
+    },
+
+    updateCustomTuning: (state, action) => {
+      const { index, note } = action.payload;
+      const tuningArray = state.tuning.split(",");
+
+      tuningArray[index] = note.trim().toUpperCase().replace("#", SHARP);
+
+      if (note.length == 2 && note.charAt(1) === "b") {
+        // Don't want to replace the note "b" with "♭"
+        // e.g., "bb" should evaluate to "B♭", "ab" should evaluate to "A♭", etc.
+        tuningArray[index] = tuningArray[index].substring(0, 1) + FLAT;
       }
-    }
+
+      const newTuning = tuningArray.join();
+
+      return {
+        ...state,
+        tuning: newTuning,
+      };
+    },
   },
 });
 
-export const { toggleNote, toggleUseFlats, updateTuning } = controlSlice.actions;
+export const {
+  toggleNote,
+  clearNotes,
+  toggleUseFlats,
+  updateTuning,
+  updateCustomTuning,
+} = controlSlice.actions;
 
 export default controlSlice.reducer;
