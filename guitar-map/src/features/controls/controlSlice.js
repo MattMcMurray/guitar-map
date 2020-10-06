@@ -204,7 +204,7 @@ export const controlSlice = createSlice({
 
       tuningArray[index] = note.trim().toUpperCase().replace("#", SHARP);
 
-      if (note.length == 2 && note.charAt(1) === "b") {
+      if (note.length === 2 && note.charAt(1) === "b") {
         // Don't want to replace the note "b" with "♭"
         // e.g., "bb" should evaluate to "B♭", "ab" should evaluate to "A♭", etc.
         tuningArray[index] = tuningArray[index].substring(0, 1) + FLAT;
