@@ -26,6 +26,28 @@ describe("Util", () => {
     });
   });
 
+  describe("getRelativeMajor", () => {
+    it("should return C when the minor is A", () => {
+      assert.strictEqual(util.getRelativeMajor("A"), "C");
+    });
+
+    it("should return F when the minor is D", () => {
+      assert.strictEqual(util.getRelativeMajor("D"), "F");
+    });
+
+    it("should work with a lowercase input", () => {
+      assert.strictEqual(util.getRelativeMajor("d"), "F");
+    });
+
+    it("should throw an error when input is invalid", () => {
+      assert.throws(
+        () => util.getRelativeMinor("gobbledeegook"),
+        Error,
+        'Input key ("gobbledeegook") is not valid'
+      );
+    });
+  });
+
   describe("getMajorScale", () => {
     it("should return the C major scale", () => {
       assert.strictEqual(util.getMajorScale("C"), `C,D,E,F,G,A,B`);
@@ -110,4 +132,10 @@ describe("Util", () => {
       );
     });
   });
+
+  describe("getMinorScale", () => {
+    it("should return the A minor scale", () => {
+      assert.strictEqual(util.getMinorScale("A"), "A,B,C,D,E,F,G");
+    });
+  })
 });
