@@ -1,10 +1,104 @@
 const SHARP = "♯";
 const FLAT = "♭";
 
+const NATURAL = "natural";
+const ACCIDENTAL = "accidental";
+
+const NOTES = [
+  {
+    type: NATURAL,
+    use: SHARP,
+    note: {
+      natural: "A",
+    },
+  },
+  {
+    type: ACCIDENTAL,
+    use: FLAT,
+    note: {
+      sharp: `A${SHARP}`,
+      flat: `B${FLAT}`,
+    },
+  },
+  {
+    type: NATURAL,
+    use: SHARP,
+    note: {
+      natural: "B",
+    },
+  },
+  {
+    type: NATURAL,
+    use: SHARP,
+    note: {
+      natural: "C",
+    },
+  },
+  {
+    type: ACCIDENTAL,
+    use: FLAT,
+    note: {
+      sharp: `C${SHARP}`,
+      flat: `D${FLAT}`,
+    },
+  },
+  {
+    type: NATURAL,
+    use: SHARP,
+    note: {
+      natural: "D",
+    },
+  },
+  {
+    type: ACCIDENTAL,
+    use: FLAT,
+    note: {
+      sharp: `D${SHARP}`,
+      flat: `E${FLAT}`,
+    },
+  },
+  {
+    type: NATURAL,
+    use: SHARP,
+    note: {
+      natural: "E",
+    },
+  },
+  {
+    type: NATURAL,
+    use: FLAT,
+    note: {
+      natural: "F",
+    },
+  },
+  {
+    type: ACCIDENTAL,
+    use: SHARP,
+    note: {
+      sharp: `F${SHARP}`,
+      flat: `G${FLAT}`,
+    },
+  },
+  {
+    type: NATURAL,
+    use: SHARP,
+    note: {
+      natural: "G",
+    },
+  },
+  {
+    type: ACCIDENTAL,
+    use: FLAT,
+    note: {
+      sharp: `G${SHARP}`,
+      flat: `A${FLAT}`,
+    },
+  },
+];
+
 module.exports = {
   FLAT,
   SHARP,
-  NATURAL_NOTES: ["A", "B", "C", "D", "E", "F", "G"],
   TUNINGS: {
     Standard: "E,A,D,G,B,E",
     "Open G": "D,G,D,G,B,D",
@@ -71,4 +165,7 @@ module.exports = {
     "G",
     "G#",
   ],
+  NOTES,
+  NATURAL,
+  ACCIDENTAL,
 };

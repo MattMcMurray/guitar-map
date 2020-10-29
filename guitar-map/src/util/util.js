@@ -1,4 +1,9 @@
-const { SHARP, FLAT, NATURAL_NOTES } = require("../constants");
+const {
+  SHARP,
+  FLAT,
+  NOTES,
+  NATURAL,
+} = require("../constants");
 
 // Clockwise from top
 const circleOfFifthsMajors = [
@@ -16,6 +21,11 @@ const circleOfFifthsMajors = [
   "F",
 ];
 
+const WHOLE = "W";
+const HALF = "H";
+
+const MAJOR_SCALE_INTERVALS = [WHOLE, WHOLE, HALF, WHOLE, WHOLE, WHOLE];
+
 /**
  * Given a major key, return the relative minor key
  *
@@ -25,7 +35,7 @@ const getRelativeMinor = (key) => {
   const noteIndex = circleOfFifthsMajors.indexOf(key.toUpperCase());
 
   if (noteIndex < 0) {
-    throw new Error(`Input key ("${key}") was not valid`);
+    throw new Error(`Input key ("${key}") is not valid`);
   }
 
   const relMinorIndex = noteIndex + 3;
@@ -47,45 +57,48 @@ const getRelativeMinor = (key) => {
  * @param {string} key
  */
 const getMajorScale = (key) => {
-  // TODO: this needs to work with accidentals
-  const keyIndex = circleOfFifthsMajors.indexOf(key.toUpperCase());
-  let sharps = ["F", ...circleOfFifthsMajors.slice(0, keyIndex)];
-  sharps.pop();
+  const upperKey = key.toUpperCase();
 
-  const scale = buildNaturalNoteScale(key).map((note) =>
-    sharps.includes(note) ? `${note}${SHARP}` : note
+  const rootIndex = NOTES.findIndex(
+    (n) =>
+      n.note.natural === upperKey ||
+      n.note.sharp === upperKey ||
+      n.note.flat === upperKey
   );
 
-  return scale.join(",");
-};
-
-/**
- * Builds a "scale" consisting of only natural notes, beginning at the given note
- * @param {string} note
- */
-const buildNaturalNoteScale = (note) => {
-  const scale = [];
-
-  let noteIndex = NATURAL_NOTES.indexOf(note.toUpperCase());
-  if (noteIndex < 0) {
-    throw new Error(`Input note ("${note}") is not valid`);
+  if (rootIndex < 0) {
+    throw new Error(`Input key (\"${key}\") is not valid)`);
   }
 
-  while (scale.length < 7) {
-    scale.push(NATURAL_NOTES[noteIndex]);
+  const root = NOTES[rootIndex];
+  const scale = [upperKey];
 
-    if (noteIndex === NATURAL_NOTES.length - 1) {
-      noteIndex = 0;
+  let interval = 0;
+  for (let i = 0; i < MAJOR_SCALE_INTERVALS.length; i++) {
+    switch (MAJOR_SCALE_INTERVALS[i]) {
+      case WHOLE:
+        interval += 2;
+        break;
+      case HALF:
+        interval += 1;
+        break;
+    }
+
+    const note = NOTES[(rootIndex + interval) % NOTES.length];
+
+    if (note.type === NATURAL) {
+      scale.push(note.note.natural);
+    } else if (root.use === SHARP) {
+      scale.push(note.note.sharp);
     } else {
-      noteIndex++;
+      scale.push(note.note.flat);
     }
   }
 
-  return scale;
+  return scale.join(",");
 };
 
 module.exports = {
   getRelativeMinor,
   getMajorScale,
-  buildNaturalNoteScale,
 };

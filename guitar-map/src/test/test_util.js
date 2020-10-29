@@ -21,7 +21,7 @@ describe("Util", () => {
       assert.throws(
         () => util.getRelativeMinor("gobbledeegook"),
         Error,
-        'Input key ("gobbledeegook") was not valid'
+        'Input key ("gobbledeegook") is not valid'
       );
     });
   });
@@ -36,56 +36,77 @@ describe("Util", () => {
     });
 
     it("should return the D major scale", () => {
-      assert.strictEqual(util.getMajorScale("d"), `D,E,F${SHARP},G,A,B,C${SHARP}`);
+      assert.strictEqual(
+        util.getMajorScale("d"),
+        `D,E,F${SHARP},G,A,B,C${SHARP}`
+      );
     });
 
     it("should return the A major scale", () => {
-      assert.strictEqual(util.getMajorScale("A"), `A,B,C${SHARP},D,E,F${SHARP},G${SHARP}`);
+      assert.strictEqual(
+        util.getMajorScale("A"),
+        `A,B,C${SHARP},D,E,F${SHARP},G${SHARP}`
+      );
     });
 
     it("should return the E major scale", () => {
-      assert.strictEqual(util.getMajorScale("E"), `E,F${SHARP},G${SHARP},A,B,C${SHARP},D${SHARP}`);
+      assert.strictEqual(
+        util.getMajorScale("E"),
+        `E,F${SHARP},G${SHARP},A,B,C${SHARP},D${SHARP}`
+      );
     });
 
     it("should return the B major scale", () => {
-      assert.strictEqual(util.getMajorScale("B"), `B,C${SHARP},D${SHARP},E,F${SHARP},G${SHARP},A${SHARP}`);
+      assert.strictEqual(
+        util.getMajorScale("B"),
+        `B,C${SHARP},D${SHARP},E,F${SHARP},G${SHARP},A${SHARP}`
+      );
     });
 
     it(`should return the F${SHARP} major scale`, () => {
-      assert.strictEqual(util.getMajorScale(`F${SHARP}`), `F${SHARP},G${SHARP},A${SHARP},B,C${SHARP},D${SHARP},E${SHARP}`);
-    });
-  });
-
-  describe("buildNaturalNoteScale", () => {
-    it("should return a list of natural notes, starting from A", () => {
-      expect(util.buildNaturalNoteScale("a")).to.eql([
-        "A",
-        "B",
-        "C",
-        "D",
-        "E",
-        "F",
-        "G",
-      ]);
+      assert.strictEqual(
+        util.getMajorScale(`F${SHARP}`),
+        `F${SHARP},G${SHARP},A${SHARP},B,C${SHARP},D${SHARP},F`
+      );
     });
 
-    it("should return a list of natural notes, starting from E", () => {
-      expect(util.buildNaturalNoteScale("e")).to.eql([
-        "E",
-        "F",
-        "G",
-        "A",
-        "B",
-        "C",
-        "D",
-      ])
+    it(`should return the D${FLAT} major scale`, () => {
+      assert.strictEqual(
+        util.getMajorScale(`D${FLAT}`),
+        `D${FLAT},E${FLAT},F,G${FLAT},A${FLAT},B${FLAT},C`
+      );
     });
 
-    it("should throw an error when given bad input", () => {
+    it(`should return the A${FLAT} major scale`, () => {
+      assert.strictEqual(
+        util.getMajorScale(`A${FLAT}`),
+        `A${FLAT},B${FLAT},C,D${FLAT},E${FLAT},F,G`
+      );
+    });
+
+    it(`should return the E${FLAT} major scale`, () => {
+      assert.strictEqual(
+        util.getMajorScale(`E${FLAT}`),
+        `E${FLAT},F,G,A${FLAT},B${FLAT},C,D`
+      );
+    });
+
+    it(`should return the B${FLAT} major scale`, () => {
+      assert.strictEqual(
+        util.getMajorScale(`B${FLAT}`),
+        `B${FLAT},C,D,E${FLAT},F,G,A`
+      );
+    });
+
+    it("should return the F major scale", () => {
+      assert.strictEqual(util.getMajorScale("F"), `F,G,A,B${FLAT},C,D,E`);
+    });
+
+    it("should throw an error on invalid input", () => {
       assert.throws(
-        () => util.buildNaturalNoteScale("gobbledeegook"),
+        () => util.getMajorScale("gobbledeegook"),
         Error,
-        'Input note ("gobbledeegook") is not valid'
+        'Input key ("gobbledeegook") is not valid'
       );
     });
   });
